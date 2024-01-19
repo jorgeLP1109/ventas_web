@@ -22,7 +22,8 @@ from .views import register, product_list, product_detail
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register, name='register'),
-    path('products/', product_list, name='product_list'),
+    #path('products/', product_list, name='product_list'),
     path('products/<int:product_id>/', product_detail, name='product_detail'),
-    path('register/', register, name='register'),
+    path('', product_list, name='product_list'),
+    
 ]

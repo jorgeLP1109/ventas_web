@@ -1,11 +1,16 @@
-<!-- En product_list.html -->
+<!-- En templates/product_list.html -->
 {% extends 'base.html' %}
 
 {% block content %}
   <h2>Lista de Productos</h2>
-  <ul>
+  <div class="product-list">
     {% for product in products %}
-      <li><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></li>
+      <div class="product-item">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Precio: ${{ product.price }}</p>
+        <!-- Agrega más detalles según tus necesidades -->
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
