@@ -9,6 +9,9 @@
         <h3>{{ product.name }}</h3>
         <p>{{ product.description }}</p>
         <p>Precio: ${{ product.price }}</p>
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
         <!-- Agrega más detalles según tus necesidades -->
       </div>
     {% endfor %}
