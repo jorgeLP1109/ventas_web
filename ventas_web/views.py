@@ -5,8 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product
 from .forms import ProductForm
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 
@@ -65,9 +64,10 @@ def edit_product(request, id_producto):
     return render(request, 'product_edit.html', {'form': form, 'product': product})
 
 
-class CustomLoginView(LoginView):
+"""class CustomLoginView(LoginView):
     def get_success_url(self):
         return '/'
+"""        
     
 def custom_login(request):
     # Lógica de la vista login
@@ -78,4 +78,35 @@ class CustomLogoutView(LogoutView):
     # Lógica personalizada si es necesario
     
     
-    pass    
+    pass   
+
+def home(request):
+    return render(request, 'home.html')
+
+def otra_vista(request):
+    # Puedes agregar lógica adicional aquí si es necesario
+
+    # Datos que puedes pasar a la plantilla (puedes personalizar según tus necesidades)
+    data = {
+        'titulo': 'Bienvenido a Mi Tienda',
+        'mensaje': 'Explora nuestra increíble selección de productos.',
+    }
+
+    # Renderiza la plantilla 'home.html' con los datos proporcionados
+    return render(request, 'home.html', data)
+
+"""class CustomLoginView(LoginView):
+    def get_success_url(self):
+        return '/'
+
+# Añade esta línea
+custom_login = CustomLoginView.as_view()"""
+
+class CustomLoginView(LoginView):
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('/home/')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return '/home/'

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    {% load static %}
+    <style>
+        body {
+            background-image: url('{% static "background/SL-1.jpg" %}');
+            background-size: cover;
+            color: rgb(112, 99, 22);
+        }
+        .contenido {
+            text-align: center;
+            padding: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenido">
+        <h1>Bienvenido a Nuestra Tienda</h1>
+        <p>Descubre nuestras ofertas increíbles en vehículos automotrices.</p>
+    </div>
+</body>
+</html>
