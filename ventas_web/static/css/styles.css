@@ -8,13 +8,22 @@ body {
     flex-wrap: wrap;
   }
   
-  .product-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-    text-align: center;
-  }
+ /* En tu archivo css/styles.css */
+.product-item {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+.product-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
   
-  /* Agrega más estilos según tus necesidades */
-  
+ 

@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import register, product_list, product_detail, create_product, edit_product
+from .views import register, product_list, product_detail, create_product, edit_product, CustomLoginView, CustomLogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView
+
+
 
 
 urlpatterns = [
@@ -30,6 +33,14 @@ urlpatterns = [
     path('productos/crear/', create_product, name='create_product'),
     #path('productos/editar/<int:id_producto>/', edit_product, name='edit_product'),
     path('editar_producto/<int:id_producto>/', edit_product, name='edit_product'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('login/', LoginView.as_view(template_name='path/to/your/login.html'), name='login'),
+    path('login/', CustomLoginView.as_view(), name='login'),
+    #path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
+    
+
+    
     
 ]
 

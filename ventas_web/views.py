@@ -5,8 +5,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product
 from .forms import ProductForm
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
 
 
+
+
+"""def product_list(request):
+    products = Product.objects.all()
+    return render(request, 'product_list.html', {'products': products})"""
+@login_required(login_url='/login/')  # Redirects unauthenticated users to the login page
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'product_list.html', {'products': products})
@@ -55,3 +63,19 @@ def edit_product(request, id_producto):
         form = ProductForm(instance=product)
 
     return render(request, 'product_edit.html', {'form': form, 'product': product})
+
+
+class CustomLoginView(LoginView):
+    def get_success_url(self):
+        return '/'
+    
+def custom_login(request):
+    # Lógica de la vista login
+    return render(request, 'login.html')
+
+
+class CustomLogoutView(LogoutView):
+    # Lógica personalizada si es necesario
+    
+    
+    pass    
