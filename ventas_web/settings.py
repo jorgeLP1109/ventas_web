@@ -132,5 +132,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ROOT_URLCONF = 'ventas_web.urls'
 
-LOGIN_REDIRECT_URL = '/home/'
+#LOGIN_URL = 'home'
+
+LOGIN_REDIRECT_URL = '/home/' #mosca con esta para el login si no carga
 LOGOUT_REDIRECT_URL = 'login'
+

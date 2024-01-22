@@ -25,11 +25,15 @@ from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
+    path('home/', home, name='home'),
     path('admin/', admin.site.urls),
     path('register/', register, name='register'),
     #path('products/', product_list, name='product_list'),
     path('products/<int:product_id>/', product_detail, name='product_detail'),
-    path('', product_list, name='product_list'),
+    
+    #path('', product_list, name='product_list'),
+    path('', home, name='home'),
+
     path('productos/crear/', create_product, name='create_product'),
     #path('productos/editar/<int:id_producto>/', edit_product, name='edit_product'),
     path('editar_producto/<int:id_producto>/', edit_product, name='edit_product'),
@@ -37,7 +41,6 @@ urlpatterns = [
     path('custom-login/', CustomLoginView.as_view(), name='custom_login'),
     #path('custom-login/', custom_login, name='custom_login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
-    path('home/', home, name='home'),
     #path('products/', include('ventas_web.urls')),
     path('otra_vista/', otra_vista, name='otra_vista'),
 
@@ -47,3 +50,5 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    

@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Product
 from .forms import ProductForm
 from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
 
 
 
@@ -103,10 +104,5 @@ def otra_vista(request):
 custom_login = CustomLoginView.as_view()"""
 
 class CustomLoginView(LoginView):
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return redirect('/home/')
-        return super().dispatch(request, *args, **kwargs)
-
     def get_success_url(self):
-        return '/home/'
+        return reverse_lazy('home')
