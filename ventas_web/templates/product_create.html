@@ -1,5 +1,32 @@
 <!-- En templates/product_create.html -->
-{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Tienda</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body>
+  <div id="navbar">
+      <a href="{% url 'product_list' %}">Productos</a>
+      
+      
+      {% if user.is_authenticated and user.is_staff %}
+            
+                <a href="{% url 'create_product' %}">Agregar Producto</a>
+                <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
+
+            {% endif %}
+
+      <a href="{% url 'logout' %}">Cerrar Sesión</a>      
+        
+        
+           
+        
+  </div>
 
 {% block content %}
   <h2>Crear Nuevo Producto</h2>

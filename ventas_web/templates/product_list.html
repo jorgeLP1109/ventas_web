@@ -12,11 +12,11 @@
 <body>
   <div id="navbar">
       <a href="{% url 'product_list' %}">Productos</a>
-      <a href="{% url 'create_product' %}">Agregar Producto</a>
+      
       
       {% if user.is_authenticated and user.is_staff %}
             
-              
+                <a href="{% url 'create_product' %}">Agregar Producto</a>
                 <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
 
             {% endif %}
@@ -40,11 +40,9 @@
               {% if product.image %}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
               {% endif %}
-              {% if user.is_authenticated and user.is_staff %}
-                <a href="{% url 'edit_product' id_producto=product.id %}">Editar Producto</a>
-              {% endif %}  
+              <a href="{% url 'edit_product' id_producto=product.id %}">Editar Producto</a>
             </div>
-          {% endfor %}
+    {% endfor %}
 
   </div>
 {% endblock %}
