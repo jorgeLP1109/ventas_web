@@ -1,14 +1,18 @@
 /* En static/css/styles.css */
 body {
-    font-family: Arial, sans-serif;
-  }
-  
-  .product-list {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
- /* En tu archivo css/styles.css */
+  font-family: Arial, sans-serif;
+  background-image: url('% static "background/SL-1.jpg" %'); /* Reemplaza con la ruta correcta a tu imagen de fondo */
+  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+  background-position: center; /* Ajusta la posición de la imagen */
+  color: #000; /* Cambia el color del texto según tus preferencias */
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Resto de tu archivo CSS... */
 .product-item {
   width: 100%;
   max-width: 300px;
@@ -24,6 +28,3 @@ body {
   display: block;
   margin: 0 auto;
 }
-
-  
- 

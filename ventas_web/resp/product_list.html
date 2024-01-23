@@ -35,16 +35,13 @@
           {% for product in products %}
             <div class="product-item">
               <h3>{{ product.name }}</h3>
-              <p>{{ product.description }}</p>
-              <p>Precio: ${{ product.price }}</p>
-              {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-              {% endif %}
-              {% if user.is_authenticated and user.is_staff %}
-                <a href="{% url 'edit_product' id_producto=product.id %}">Editar Producto</a>
-              {% endif %}  
-            </div>
-          {% endfor %}
-
+                <p>{{ product.description }}</p>
+                <p>Precio: ${{ product.price }}</p>
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          {% endif %}
+        <!-- Agrega más detalles según tus necesidades -->
+      </div>
+    {% endfor %}
   </div>
 {% endblock %}

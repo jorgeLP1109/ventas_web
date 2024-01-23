@@ -34,13 +34,10 @@ urlpatterns = [
     
     #path('', product_list, name='product_list'),
     path('', home, name='home'),
-    #path('edit_product/', edit_product, name='edit_product'),
-    path('edit_product/<int:id_producto>/', edit_product, name='edit_product'),
-
 
     path('productos/crear/', create_product, name='create_product'),
-    #path('productos/editar/<int:id_producto>/', edit_product, name='edit_product'),
-    #path('edit_product/<int:id_producto>/', edit_product, name='edit_product'),
+    path('productos/editar/<int:id_producto>/', edit_product, name='edit_product'),
+    #path('editar_producto/<int:id_producto>/', edit_product, name='edit_product'),
     path('login/', LoginView.as_view(), name='login'),
     path('custom-login/', CustomLoginView.as_view(), name='custom_login'),
     #path('custom-login/', custom_login, name='custom_login'),

@@ -46,7 +46,7 @@ def create_product(request):
 
     return render(request, 'product_create.html', {'form': form})
 
-@login_required
+"""@login_required
 def edit_product(request, id_producto):
     product = get_object_or_404(Product, id=id_producto)
     
@@ -63,13 +63,34 @@ def edit_product(request, id_producto):
         form = ProductForm(instance=product)
 
     return render(request, 'product_edit.html', {'form': form, 'product': product})
+"""    
 
 
 """class CustomLoginView(LoginView):
     def get_success_url(self):
         return '/'
 """        
-    
+
+@login_required
+def edit_product(request, id_producto):
+    # Obtén el producto específico o redirecciona si no se encuentra
+    product = get_object_or_404(Product, id=id_producto)
+
+    # Asegúrate de que solo los administradores puedan editar productos
+    if not request.user.is_staff:
+        return redirect('product_list')
+
+    if request.method == 'POST':
+        # Si se envió el formulario, procesa la información
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')
+    else:
+        # Si es una solicitud GET, muestra el formulario con los datos actuales del producto
+        form = ProductForm(instance=product)
+
+    return render(request, 'product_edit.html', {'form': form, 'product': product})
 def custom_login(request):
     # Lógica de la vista login
     return render(request, 'login.html')
