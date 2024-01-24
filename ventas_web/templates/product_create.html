@@ -14,10 +14,11 @@
       <a href="{% url 'product_list' %}">Productos</a>
       
       
+      
       {% if user.is_authenticated and user.is_staff %}
             
                 <a href="{% url 'create_product' %}">Agregar Producto</a>
-                <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
+                
 
             {% endif %}
 
