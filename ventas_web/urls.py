@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import register, product_list, product_detail, create_product, edit_product, CustomLoginView, CustomLogoutView, home, otra_vista, custom_login
+from .views import register, add_to_cart, product_list, product_detail, create_product, edit_product, CustomLoginView, CustomLogoutView, home, otra_vista, custom_login
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
@@ -31,6 +31,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register, name='register'),
     path('products/<int:product_id>/', product_detail, name='product_detail'),
+    path('add_to_cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
+    
     
     #path('', product_list, name='product_list'),
     path('', home, name='home'),

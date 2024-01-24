@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Product
+from .models import Product, Cart
 from .forms import ProductForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
@@ -14,6 +14,16 @@ def product_list(request):
     products = Product.objects.all()
     return render(request, 'product_list.html', {'products': products})
 
+def add_to_cart(request, product_id):
+    product = Product.objects.get(pk=product_id)
+
+    # Check if the user has a cart
+    user_cart, created = Cart.objects.get_or_create(user=request.user)
+
+    # Add the product to the user's cart
+    user_cart.products.add(product)
+
+    return redirect('product_list')
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     images = [product.image, product.image_2, product.image_3, product.image_4, product.image_5]
