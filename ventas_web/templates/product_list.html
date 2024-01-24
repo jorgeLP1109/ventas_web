@@ -26,22 +26,25 @@
   </div>
       
 
-   {% block content %}
-    <h2 class="title">Lista de Productos</h2>
-      <div class="product-list">
-      {% for product in products %}
-        <div class="product-item">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-          <p>Precio: ${{ product.price }}</p>
-            <a href="{% url 'product_detail' product_id=product.id %}">Ver Detalles</a>
-            {% if user.is_authenticated and user.is_staff %}
-              <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
-            {% endif %}
+   <!-- En product_list.html -->
 
-        </div>
-      {% endfor %}
-        </div>
-    {% endblock %}
+{% block content %}
+<h2 class="title">Lista de Productos</h2>
+<div class="product-list">
+  {% for product in products %}
+    <div class="product-item">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <p>Precio: ${{ product.price }}</p>
+      <img src="{{ product.image.url }}" alt="{{ product.name }}">  <!-- Muestra la imagen de previsualización -->
+      <a href="{% url 'product_detail' product_id=product.id %}">Ver Detalles</a>
+      {% if user.is_authenticated and user.is_staff %}
+        <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
   </body>  
 

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Product, ProductImage
+from .models import Product
 from .forms import ProductForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
@@ -15,8 +15,10 @@ def product_list(request):
     return render(request, 'product_list.html', {'products': products})
 
 def product_detail(request, product_id):
-    product = Product.objects.get(id=product_id)
-    images = ProductImage.objects.filter(product=product)
+    product = get_object_or_404(Product, id=product_id)
+    images = [product.image, product.image_2, product.image_3, product.image_4, product.image_5]
+    # Filtrar imágenes no nulas
+    images = [image for image in images if image]
 
     return render(request, 'product_detail.html', {'product': product, 'images': images})
 

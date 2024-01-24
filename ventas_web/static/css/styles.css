@@ -52,3 +52,16 @@ body{
 svg{font-weight:bold;max-width:600px;height:auto;}
 
 }
+
+/* En tu archivo styles.css */
+.image-slider {
+  max-width: 500px; /* Ajusta el ancho máximo según tus preferencias */
+  margin: 0 auto; /* Centra el slider en la página */
+  overflow: hidden; /* Oculta las partes de la imagen que excedan el tamaño del contenedor */
+}
+
+.image-slider img {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  height: auto; /* Mantiene la proporción original de la imagen */
+  cursor: pointer; /* Muestra un cursor de clic en la imagen */
+}
