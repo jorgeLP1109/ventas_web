@@ -15,15 +15,14 @@ def product_list(request):
     return render(request, 'product_list.html', {'products': products})
 
 def add_to_cart(request, product_id):
-    product = Product.objects.get(pk=product_id)
-
-    # Check if the user has a cart
+    product = Product.objects.get(id=product_id)
     user_cart, created = Cart.objects.get_or_create(user=request.user)
 
-    # Add the product to the user's cart
     user_cart.products.add(product)
+    user_cart.save()
 
-    return redirect('product_list')
+    # Renderizar la página del carrito
+    return render(request, 'cart.html', {'cart': user_cart})
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     images = [product.image, product.image_2, product.image_3, product.image_4, product.image_5]
