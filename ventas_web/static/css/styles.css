@@ -4,7 +4,7 @@ body {
   background-image: url('% static "background/SL-1.jpg" %'); /* Reemplaza con la ruta correcta a tu imagen de fondo */
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
   background-position: center; /* Ajusta la posición de la imagen */
-  background-color: rgb(237, 243, 243);
+  background-color: rgb(180, 190, 190);
   color: #000; /* Cambia el color del texto según tus preferencias */
 }
 
@@ -28,4 +28,10 @@ body {
   height: auto;
   display: block;
   margin: 0 auto;
+  object-fit: cover;
+}
+
+.title{
+  color:rgb(199, 187, 23);
+  background-color: rgb(14, 13, 13);
 }
