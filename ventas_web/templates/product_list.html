@@ -12,37 +12,36 @@
 <body>
   <div id="navbar">
       <a href="{% url 'product_list' %}">Productos</a>
-      
-      
+            
       {% if user.is_authenticated and user.is_staff %}
             
-                <a href="{% url 'create_product' %}">Agregar Producto</a>
-                <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
+        <a href="{% url 'create_product' %}">Agregar Producto</a>
+        <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
 
+      {% endif %}
+
+        <a href="{% url 'logout' %}">Cerrar Sesión</a>      
+   
+       
+  </div>
+      
+
+   {% block content %}
+    <h2 class="title">Lista de Productos</h2>
+      <div class="product-list">
+      {% for product in products %}
+        <div class="product-item">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <p>Precio: ${{ product.price }}</p>
+            <a href="{% url 'product_detail' product_id=product.id %}">Ver Detalles</a>
+            {% if user.is_authenticated and user.is_staff %}
+              <a href="{% if product.id %}{% url 'edit_product' product.id %}{% endif %}">Editar Producto</a>
             {% endif %}
 
-      <a href="{% url 'logout' %}">Cerrar Sesión</a>      
-        
-        
-           
-        
-  </div>
-</body>      
+        </div>
+      {% endfor %}
+        </div>
+    {% endblock %}
+  </body>  
 
-    {% block content %}
-      <h2 class="title">Lista de Productos</h2>
-        <div class="product-list">
-          {% for product in products %}
-            <div class="product-item" >
-              <h3>{{ product.name }}</h3>
-              <p>{{ product.description }}</p>
-              <p>Precio: ${{ product.price }}</p>
-              {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-              {% endif %}
-              <a href="{% url 'edit_product' id_producto=product.id %}">Editar Producto</a>
-            </div>
-    {% endfor %}
-
-  </div>
-{% endblock %}
