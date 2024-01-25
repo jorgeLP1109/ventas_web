@@ -14,15 +14,55 @@ def product_list(request):
     products = Product.objects.all()
     return render(request, 'product_list.html', {'products': products})
 
+# En tu views.py
+from django.shortcuts import render, get_object_or_404
+from .models import Product
+
 def add_to_cart(request, product_id):
-    product = Product.objects.get(id=product_id)
+    product = get_object_or_404(Product, pk=product_id)
     user_cart, created = Cart.objects.get_or_create(user=request.user)
+    
+    # Verifica si el producto ya está en el carrito
+    if not user_cart.products.filter(id=product.id).exists():
+        # Si no está en el carrito, añádelo
+        user_cart.products.add(product)
+    
+    total_price = product.price * product.cart_set.first.quantity
+    
+    return render(request, 'cart.html', {'cart': user_cart, 'total_price': total_price})
 
-    user_cart.products.add(product)
-    user_cart.save()
 
-    # Renderizar la página del carrito
+
+def update_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    user_cart = Cart.objects.get(user=request.user)
+    quantity = int(request.POST['quantity'])
+
+    cart_product = user_cart.products.through.objects.get(product=product, cart=user_cart)
+    cart_product.quantity = quantity
+    cart_product.save()
+
+    return redirect('cart')
+
+def remove_from_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    user_cart = Cart.objects.get(user=request.user)
+
+    user_cart.products.remove(product)
+
+    return redirect('cart')
+
+def cart_view(request):
+    user_cart, created = Cart.objects.get_or_create(user=request.user)
     return render(request, 'cart.html', {'cart': user_cart})
+
+def checkout(request):
+    # Agrega aquí la lógica de procesamiento de pago según la API que vayas a utilizar
+    # Puedes redirigir a una página de confirmación o manejar otros pasos del proceso de compra
+    # Por ahora, simplemente limpiamos el carrito y redirigimos a la página de inicio
+    user_cart, created = Cart.objects.get_or_create(user=request.user)
+    user_cart.products.clear()
+    return redirect('home')
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     images = [product.image, product.image_2, product.image_3, product.image_4, product.image_5]
